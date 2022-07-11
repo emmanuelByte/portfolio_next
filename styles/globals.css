@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  font-size: var(--font-s1ze-300);
+  font-family: Satioshi, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Helvetica Neue, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.2rem;
+}
+
+@font-face {
+  font-family: 'Satioshi';
+  src: url('/fonts/Satoshi/Satioshi.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Gothink-Bold';
+  src: url('/fonts/GoThink/gothink_bold.otf') format('truetype');
+}
+@font-face {
+  font-family: 'Gothink-extra-light';
+  src: url('/fonts/GoThink/gothink_extra-light-condensed.otf')
+    format('truetype');
+}
+@font-face {
+  font-family: 'Gothink-italic';
+  src: url('/fonts/GoThink/gothink_hair_italic.otf') format('truetype');
+}
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+.page-nav {
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+div.overflow {
+  overflow-x: hidden;
+}
+div.not-overflow {
+  overflow-x: visible;
+}

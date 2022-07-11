@@ -1,0 +1,153 @@
+@import './_mixins.scss';
+@import './colors.scss';
+
+.inner__circle::before {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  @include pseudo-element();
+  @include center-circle() {
+    top: 0;
+  }
+  z-index: 2;
+  background-color: $primary;
+  @include breakpoint('sm') {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.inner__circle::after {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  @include pseudo-element();
+  @include animation(circle, 3s, 0s, ease-in-out, Infinite) {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  z-index: 2;
+
+  @include center-circle() {
+    top: 0;
+  }
+  @include breakpoint('sm') {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.stepper {
+  position: relative;
+  width: 2px;
+  height: 100%;
+  background-color: #fff;
+}
+.big__circle {
+  width: 5px;
+  & > .inner__circle {
+    &:before {
+      width: 60px;
+      height: 60px;
+      @include breakpoint('sm') {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    &:after {
+      width: 30px;
+      height: 30px;
+      @include breakpoint('sm') {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+.circle::before {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  @include pseudo-element();
+  @include center-circle() {
+  }
+  z-index: 2;
+  background-color: $primary;
+}
+
+.circle::after {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background-color: #fff;
+  @include pseudo-element();
+  @include animation(circle, 3s, 1s, ease-in-out, Infinite) {
+    0% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+  z-index: 2;
+
+  @include center-circle() {
+  }
+}
+.circle2::after {
+  @include animation(circle2, 3s, 2s, ease-in-out, Infinite) {
+    0% {
+      opacity: 0.5;
+    }
+    30% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0.7;
+    }
+    90% {
+      opacity: 0.2;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+}
+
+.current-flow-right1 {
+  @include current-flow-right(right1, 0s);
+}
+.current-flow-right2 {
+  @include current-flow-right(right2, 5s);
+}
+
+.current-flow-left1 {
+  @include current-flow-left(left1, 0s);
+}
+.current-flow-left2 {
+  @include current-flow-left(left2, 5s);
+}
+
+.current-flow-down1 {
+  @include current-flow-down(down1, 5s);
+}
+.current-flow-down2 {
+  @include current-flow-down(down2, 1s);
+}

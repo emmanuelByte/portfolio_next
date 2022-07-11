@@ -1,0 +1,81 @@
+@mixin center-circle() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @content();
+}
+@mixin pseudo-element() {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  content: '';
+}
+@mixin animation($name, $duration, $delay, $timing, $iteration) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-timing-function: $timing;
+  animation-fill-mode: forwards;
+  animation-iteration-count: $iteration;
+  @keyframes #{$name} {
+    @content();
+  }
+}
+@mixin flex() {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  @content();
+}
+@mixin breakpoint($size) {
+  @if $size == 'sm' {
+    @media screen and (max-width: 700px) {
+      @content();
+    }
+    @if $size == 'md' {
+      @media screen and (min-width: 800px) {
+        @content();
+      }
+    }
+  }
+}
+@mixin current-flow-down($name, $delay) {
+  @include animation($name, 10s, $delay, ease-in, Infinite) {
+    0% {
+      top: 0;
+    }
+
+    100% {
+      top: 90%;
+    }
+  }
+}
+@mixin current-flow-left($name, $delay) {
+  @include animation($name, 5s, $delay, ease-in, Infinite) {
+    0% {
+      right: 0;
+    }
+
+    100% {
+      right: 90%;
+      @include breakpoint('sm') {
+        right: 80%;
+      }
+    }
+  }
+}
+@mixin current-flow-right($name, $delay) {
+  @include animation($name, 5s, $delay, ease-in, Infinite) {
+    0% {
+      left: 0;
+    }
+
+    100% {
+      left: 90%;
+      @include breakpoint('sm') {
+        left: 80%;
+      }
+    }
+  }
+}
