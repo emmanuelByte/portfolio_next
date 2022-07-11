@@ -9,7 +9,7 @@ const Section = () => {
   React.useEffect(() => {
     console.log(inView);
     AOS.refresh();
-  }, [inView]);
+  });
   return (
     <div className="grid grid-cols-[.7fr,.2fr,1.5fr] w-100" ref={ref}>
       <div data-aos="fade-right">
@@ -31,14 +31,16 @@ const Section = () => {
           {'K8S, GCP, AWS, Typescript, Golang, Docker, Postgres, TimescaleDB, Prometheus, Grafana'
             .split(',')
             .map((tech, index) => (
-              <span className="shadow px-2 rounded">{tech.trim()}</span>
+              <span key={index} className="shadow px-2 rounded">
+                {tech.trim()}
+              </span>
             ))}
         </div>
         <div className="mt-5">
           <h1 className="mb-2">Responsibilities:</h1>
           <ul className="list-decimal text-primary-100 pb-16">
-            {[...Array(10)].map(() => (
-              <li className="mb-2">
+            {[...Array(10)].map((_, index) => (
+              <li className="mb-2" key={index}>
                 Writing efficient SQL queries for independent features
               </li>
             ))}

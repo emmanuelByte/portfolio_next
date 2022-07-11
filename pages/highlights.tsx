@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Section from '../components/Highlight/Section';
 import Stepper from '../components/Stepper/Stepper';
 import { useAOS } from '../context/Aos';
@@ -8,7 +8,7 @@ import lodash from 'lodash';
 import useResize from '../hooks/useResize';
 const HighLight = () => {
   const isLoading = usePageTransition();
-  const localData = [1, 2, 3, 4, 5, 6, 9];
+  const localData = useMemo(() => [1, 2, 3, 4, 5, 6, 9], []);
   const screenSize = useResize() as number;
   const [data, setData] = useState<any[] | any[][]>();
   const device = useDeviceType();
@@ -19,7 +19,7 @@ const HighLight = () => {
     } else {
       setData(localData);
     }
-  }, [screenSize]);
+  }, [localData, screenSize]);
   return (
     <div className="flex min-h-screen h-full flex-col pb-2 pt-10 px-10 md:px-20 w-full items-center mx-auto">
       {isLoading === false && (
@@ -28,7 +28,7 @@ const HighLight = () => {
             <h1>Lorem ipsum dolor sit amet consectetur, </h1>
           </div>
           {data!?.map((item, index) => (
-            <Section {...{ key: index, index, item }} />
+            <Section {...{ index, item }} key={index} />
           ))}
         </div>
       )}

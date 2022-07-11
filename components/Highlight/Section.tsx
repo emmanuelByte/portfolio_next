@@ -23,7 +23,7 @@ const Section = ({ index, item }: { index: number; item: any }) => {
       second: isArray && item[1],
     });
     AOS.refresh();
-  }, [inView, screee]);
+  }, [AOS, device, inView, isArray, item, screee]);
   const v = (index % 2) + 1;
 
   return (

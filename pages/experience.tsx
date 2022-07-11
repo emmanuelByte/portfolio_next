@@ -8,7 +8,7 @@ const Experience = () => {
 
   return (
     <div className="flex min-h-screen h-full flex-col pb-2 pt-10 px-10 w-4/5 items-center mx-auto">
-      {isLoading === false && [1, 2, 3].map((i) => <Section />)}
+      {isLoading === false && [1, 2, 3].map((i) => <Section key={i} />)}
     </div>
   );
 };

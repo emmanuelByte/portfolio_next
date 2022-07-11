@@ -60,7 +60,7 @@ const HeroSection = () => {
           data-aos="fade-down"
           data-aos-duration="3000"
         >
-          I'm "Name",
+          I&apos;m &qout;Name&qout;,
         </h1>
         <h1
           className="text-7xl font-Satoshi font-bold text-transparent bg-clip-text bg-gradient-to-b from-primary-light to-primary-dark/20"

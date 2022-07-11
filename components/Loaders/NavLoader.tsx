@@ -11,7 +11,7 @@ const NavLoader = () => {
     // return () => {
     //   toggleIsLoading(false);
     // };
-  }, [isLoading]);
+  }, [isLoading, toggleIsLoading]);
   return (
     <div
       className={`absolute inset-0 w-full h-screen z-20 bg-secondary text-white flex items-center justify-center ${
