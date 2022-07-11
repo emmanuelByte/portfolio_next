@@ -1,6 +1,6 @@
 import Styles from '../../styles/scss/Stepper.module.scss';
 import classNames from 'classnames';
-const Stepper = ({ isBig, v }: { isBig?: boolean; v: number }) => {
+const Stepper = ({ isBig, v }: { isBig?: boolean; v?: number }) => {
   return (
     <div
       className={classNames(Styles.stepper, {
