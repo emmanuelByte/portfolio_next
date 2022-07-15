@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useAOS } from '../../context/Aos';
 import useInView from '../../hooks/useInView';
 import Stepper from '../Stepper/Stepper';
 import Styles from '../../styles/scss/Stepper.module.scss';
 import classNames from 'classnames';
 import useResize from '../../hooks/useResize';
 import useDeviceType from '../../hooks/useDeviceType';
+import useControls from '../../hooks/useControls';
+import { motion } from 'framer-motion';
+
 const Section = ({ index, item }: { index: number; item: any }) => {
-  const AOS = useAOS() as any;
-  const { ref, entry, inView } = useInView({ threshold: 0 });
+  const { ref, entry, inView } = useInView({ threshold: 0.5 });
   const isArray = Array.isArray(item);
   const device = useDeviceType();
   const [data, setData] = useState({
@@ -17,15 +18,54 @@ const Section = ({ index, item }: { index: number; item: any }) => {
   });
   const screee = useResize();
   React.useEffect(() => {
-    console.log({ item, screee, isArray, device });
     setData({
       first: isArray ? item[0] : item,
       second: isArray && item[1],
     });
-    AOS.refresh();
-  }, [AOS, device, inView, isArray, item, screee]);
+  }, [device, inView, isArray, item, screee]);
   const v = (index % 2) + 1;
-
+  const leftVariation = {
+    visible: {
+      opacity: 1,
+      scale: [0.9, 1.05, 1.1, 1],
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      x: 0,
+    },
+    hidden: {
+      opacity: 0,
+      x: -100,
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      scale: 0,
+    },
+  };
+  const rightVariation = {
+    visible: {
+      opacity: 1,
+      scale: [0.9, 1.05, 1.1, 1],
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      x: 0,
+    },
+    hidden: {
+      opacity: 0,
+      x: 100,
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      scale: 0,
+    },
+  };
+  const leftControls = useControls(inView);
+  const rightControls = useControls(inView);
   return (
     <div
       className={`grid ${
@@ -73,28 +113,30 @@ const Section = ({ index, item }: { index: number; item: any }) => {
         </div>
       )}
 
-      <div
-        data-aos="fade-right"
+      <motion.div
         className="place-self-center bg-gray-900/60 p-10 rounded shadow"
+        animate={leftControls}
+        variants={leftVariation}
       >
         Left Lorem ipsum dolor sit amet, consectetur adipisicing elit.
         Reprehenderit cumque vel voluptate quaerat! Necessitatibus dolor hic
         repellat rerum a, optio inventore dolorum, sequi neque quod aspernatur
         maiores vero nulla alias. <br />
-      </div>
+      </motion.div>
       <div className="mx-5 flex justify-center z-10">
         <Stepper isBig v={v} />
       </div>
       {data.second && (
-        <div
-          data-aos="fade-left"
+        <motion.div
+          animate={rightControls}
+          variants={rightVariation}
           className="place-self-center bg-gray-900/60 p-10 rounded shadow"
         >
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam
           mollitia sed unde veritatis beatae expedita cupiditate? Fugit iste
           non, libero culpa adipisci beatae blanditiis repellendus sapiente
           recusandae vitae, iusto quia?
-        </div>
+        </motion.div>
       )}
     </div>
   );

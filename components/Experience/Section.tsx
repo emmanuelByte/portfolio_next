@@ -1,25 +1,62 @@
 import React from 'react';
-import { useAOS } from '../../context/Aos';
 import useInView from '../../hooks/useInView';
 import Stepper from '../Stepper/Stepper';
-
+import { motion } from 'framer-motion';
+import useControls from '../../hooks/useControls';
 const Section = () => {
-  const AOS = useAOS() as any;
-  const { ref, entry, inView } = useInView({ threshold: 0 });
-  React.useEffect(() => {
-    console.log(inView);
-    AOS.refresh();
-  });
+  const { ref, entry, inView } = useInView({ threshold: 0.5 });
+  const leftVariation = {
+    visible: {
+      opacity: 1,
+      scale: [0.9, 1.05, 1.1, 1],
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      x: 0,
+    },
+    hidden: {
+      opacity: 0,
+      x: -100,
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      scale: 0,
+    },
+  };
+  const rightVariation = {
+    visible: {
+      opacity: 1,
+      scale: [0.9, 1.05, 1.1, 1],
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      x: 0,
+    },
+    hidden: {
+      opacity: 0,
+      x: 100,
+      transition: {
+        duration: 1,
+        ease: 'easeInOut',
+      },
+      scale: 0,
+    },
+  };
+  const leftControls = useControls(inView);
+  const rightControls = useControls(inView);
   return (
-    <div className="grid grid-cols-[.7fr,.2fr,1.5fr] w-100" ref={ref}>
-      <div data-aos="fade-right">
+    <motion.div className="grid grid-cols-[.7fr,.2fr,1.5fr] w-100" ref={ref}>
+      <motion.div animate={leftControls} variants={leftVariation}>
         <h1>Part Time Infrastructure Consultant</h1>
         <h4 className="text-primary-100 mt-2">May. 2020 - Present</h4>
-      </div>
+      </motion.div>
       <div className="mx-5">
         <Stepper />
       </div>
-      <div data-aos="fade-left">
+      <motion.div animate={rightControls} variants={rightVariation}>
         <div className="flex justify-between items-center">
           <h1>Replex GmbH Backend/DevOps Engineer</h1>
           <h4 className="text-primary-100">Remote, Germany</h4>
@@ -46,8 +83,8 @@ const Section = () => {
             ))}
           </ul>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

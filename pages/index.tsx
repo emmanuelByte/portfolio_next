@@ -7,12 +7,12 @@ import usePageTransition from '../hooks/pageTransition';
 const Home: NextPage = () => {
   const isLoading = usePageTransition();
   return (
-    <div className="flex min-h-[calc(100vh-5rem)] h-full flex-col py-2 px-10 no-scrollbar">
+    <div className="flex sm:min-h-[calc(100vh-5rem)] h-full flex-col py-2 px-10 no-scrollbar">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {isLoading === false && <HeroSection />}
+      {<HeroSection />}
     </div>
   );
 };

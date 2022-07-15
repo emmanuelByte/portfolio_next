@@ -1,7 +1,7 @@
 import React from 'react';
 import { useInView as uIv } from 'react-intersection-observer';
 
-const useInView = (options: any) => {
+const useInView = (options?: any) => {
   const { ref, inView, entry } = uIv({
     /* Optional options */
     threshold: 0,

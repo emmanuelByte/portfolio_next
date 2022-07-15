@@ -47,4 +47,5 @@ div.overflow {
 }
 div.not-overflow {
   overflow-x: visible;
+  color: rgb(251 245 243 / 1);
 }

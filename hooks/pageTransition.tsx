@@ -7,7 +7,7 @@ const usePageTransition = () => {
     toggleIsLoading(true);
     setTimeout(() => {
       toggleIsLoading(false);
-    }, 2000);
+    }, 1000);
   }, []);
   return isLoading;
 };
